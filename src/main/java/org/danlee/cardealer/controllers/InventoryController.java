@@ -21,7 +21,6 @@ public class InventoryController {
     public String getCarsIndex(Model model) {
         ArrayList<CarWithTransaction> allCarsWithTransactions = inventoryService.combineCarsWithTransactions();
         model.addAttribute("allCars", allCarsWithTransactions);
-        System.out.println(allCarsWithTransactions.size());
 
         return "index.html";
     }

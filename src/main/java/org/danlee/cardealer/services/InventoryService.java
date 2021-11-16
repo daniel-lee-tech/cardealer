@@ -1,6 +1,7 @@
 package org.danlee.cardealer.services;
 
 import org.danlee.cardealer.entities.Car;
+import org.danlee.cardealer.entities.Transaction;
 import org.danlee.cardealer.repositories.CarRepository;
 import org.danlee.cardealer.repositories.TransactionRepository;
 import org.danlee.cardealer.viewmodels.CarWithTransaction;
@@ -19,12 +20,22 @@ public class InventoryService {
         this.transactionRepository = transactionRepository;
     }
 
+    public boolean isUnsold(Car car) {
+        Car carInDatabase = carRepository.findById(car.getId());
+
+        if (carInDatabase == null) {
+            new Exception("Car is not in the database");
+        }
+
+        return transactionRepository.getTransactionByCar(car) == null;
+    }
+
     public ArrayList<String> getUnsoldModels() {
         ArrayList<Car> allCars = carRepository.findAllCars();
         ArrayList<String> unsoldModels = new ArrayList<>();
 
         for (Car loopedCar: allCars) {
-            if (transactionRepository.isUnsold(loopedCar)) {
+            if (isUnsold(loopedCar)) {
                 unsoldModels.add(loopedCar.getModel());
             }
         }
@@ -46,7 +57,7 @@ public class InventoryService {
 
     public ArrayList<Car> findUnsoldCars() {
         ArrayList<Car> allCars = carRepository.findAllCars();
-        return new ArrayList<Car>(allCars.stream().filter(car -> !transactionRepository.isUnsold(car)).toList());
+        return new ArrayList<Car>(allCars.stream().filter(this::isUnsold).toList());
     }
 
     public ArrayList<Car> findUnsoldCarsByModel(String modelName) {

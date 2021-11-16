@@ -25,18 +25,6 @@ public class TransactionRepository {
         return allTransactions;
     }
 
-    public boolean isUnsold(Car car) {
-        ArrayList<Transaction> allTransactions = mockDatabase.getAllTransactions();
-
-        for (Transaction loopedTransaction : allTransactions) {
-            if (loopedTransaction.getCar().getId().equals(car.getId())) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     public Transaction getTransactionByCar(Car car) {
         ArrayList<Transaction> allTransactions = mockDatabase.getAllTransactions();
 
