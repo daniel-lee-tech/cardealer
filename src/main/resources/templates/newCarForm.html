@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/globalHeadInsert.html">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <div th:include="fragments/navbar.html"></div>
+    <form
+            th:object="${newCarDTO}"
+            th:action="@{/cars/new}"
+            enctype="multipart/form-data"
+            method="POST"
+    >
+        <input type="hidden" th:field="${newCarDTO.id}"/>
+        <label for="manufacturer">
+            manufacturer:
+        </label>
+        <input id="manufacturer" type="text" th:field="${newCarDTO.manufacturer}"/>
+
+        <label for="dateOfPurchase">
+            dateOfPurchase:
+        </label>
+        <input type="date" id="dateOfPurchase" th:field="${newCarDTO.dateOfPurchase}"/>
+
+        <label for="mileage">
+            mileage
+        </label>
+        <input id="mileage" type="number" th:field="${newCarDTO.mileage}"/>
+
+        <label for="make">
+            make:
+        </label>
+        <input id="make" type="text" th:field="${newCarDTO.make}"/>
+
+        <label for="model">
+            model:
+        </label>
+        <input id="model" type="text" th:field="${newCarDTO.model}"/>
+
+
+        <label for="description">
+            description:
+        </label>
+        <textarea id="description" type="text" th:field="${newCarDTO.description}" cols="15" rows="10"></textarea>
+
+        <label for="price">
+            price:
+        </label>
+        <input id="price" type="number" th:field="${newCarDTO.price}"/>
+
+        <label for="model">
+            Image Name:
+        </label>
+        <input id="imageUrl" type="text" th:field="${newCarDTO.imageUrl}"/>
+
+
+        <label for="imageFile">
+            Upload Image:
+        </label>
+        <input id="imageFile" type="file" th:field="${newCarDTO.imageFile}"/>
+
+        <label for="used">
+            used:
+            <input id="used" type="checkbox" th:field="${newCarDTO.used}"/>
+        </label>
+        <br/>
+
+        <button type="submit">Submit</button>
+    </form>
+
+
+</main>
+</body>
+</html>

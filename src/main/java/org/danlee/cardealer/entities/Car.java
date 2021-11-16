@@ -1,11 +1,15 @@
 package org.danlee.cardealer.entities;
 
+import org.danlee.cardealer.dto.CarDTO;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.UUID;
 
 public class Car {
     private UUID id;
     private String manufacturer;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfPurchase;
     private int mileage;
     private String make;
@@ -90,6 +94,7 @@ public class Car {
     }
 
     public double getPrice() {
+        if (getDateOfPurchase() == null) return 0;
         Date dateOfListing = getDateOfPurchase();
         Date currentDate = new Date();
         long millisecondsInADay = 86_400_000L;

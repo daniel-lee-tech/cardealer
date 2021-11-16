@@ -30,4 +30,8 @@ public class CarRepository {
 
         return null;
     }
+
+    public void save(Car car) {
+        mockDatabase.addCar(car);
+    }
 }

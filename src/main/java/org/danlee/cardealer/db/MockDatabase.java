@@ -75,4 +75,8 @@ public class MockDatabase {
     public void addTransaction(Transaction transaction) {
         allTransactions.add(transaction);
     }
+
+    public void addCar(Car car) {
+        allCars.add(car);
+    }
 }
