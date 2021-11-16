@@ -30,17 +30,4 @@ public class CarRepository {
 
         return null;
     }
-
-    public ArrayList<String> getAllModels() {
-        ArrayList<Car> allCars = mockDatabase.getAllCars();
-        ArrayList<String> allModels = new ArrayList<>();
-
-        for (Car loopedCar: allCars) {
-            if (!allModels.contains(loopedCar.getModel())) {
-                allModels.add(loopedCar.getModel());
-            }
-        }
-
-        return allModels;
-    }
 }

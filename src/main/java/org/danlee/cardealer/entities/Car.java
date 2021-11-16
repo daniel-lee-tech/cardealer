@@ -1,8 +1,5 @@
 package org.danlee.cardealer.entities;
 
-
-import org.danlee.cardealer.repositories.TransactionRepository;
-
 import java.util.Date;
 import java.util.UUID;
 

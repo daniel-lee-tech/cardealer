@@ -7,7 +7,7 @@
 <body>
 <main> <div th:include="fragments/navbar.html"></div>
 <div th:each="model: ${models}">
-    <a th:href="@{/carsbymodel/{model}(model=${model})}">Show cars with model <span th:text="${model}"></span></a>
+    <a th:href="@{/inventory/model/{model}(model=${model})}">Show cars with model <span th:text="${model}"></span></a>
     <hr />
 </div>
 </main></body>

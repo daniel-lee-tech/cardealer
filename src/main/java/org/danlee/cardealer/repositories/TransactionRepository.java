@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Repository
 public class TransactionRepository {
-    private MockDatabase mockDatabase;
+    private final MockDatabase mockDatabase;
 
     public TransactionRepository(MockDatabase mockDatabase) {
         this.mockDatabase = mockDatabase;
@@ -25,16 +25,16 @@ public class TransactionRepository {
         return allTransactions;
     }
 
-    public boolean checkTransactionForCar(Car car) {
+    public boolean isUnsold(Car car) {
         ArrayList<Transaction> allTransactions = mockDatabase.getAllTransactions();
 
         for (Transaction loopedTransaction : allTransactions) {
             if (loopedTransaction.getCar().getId().equals(car.getId())) {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     public Transaction getTransactionByCar(Car car) {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Controller
@@ -82,6 +83,7 @@ public class TransactionController {
         }
 
         transaction.setCar(possibleCar);
+        transaction.setTransactionDate(new Date());
         transactionRepository.save(transaction);
 
         return "redirect:/transactions/"+transaction.getId();
