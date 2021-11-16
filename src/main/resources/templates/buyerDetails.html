@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/globalHeadInsert.html">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main> <div th:include="fragments/navbar.html"></div>
+<div th:if="${foundBuyer}">
+    <p th:text="${buyer.fullName}"></p>
+    <p th:text="${buyer.email}"></p>
+    <p th:text="${buyer.fullAddress}"></p>
+</div>
+
+<div th:unless="${foundBuyer}">
+    <p>Buyer for that ID cannot be found!</p>
+</div>
+
+</main></body>
+</html>

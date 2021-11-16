@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/globalHeadInsert.html">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <div th:include="fragments/navbar.html"></div>
+    <section th:if="${foundCar}">
+        <form>
+            <figure>
+                <img th:src="${car.imageUrl}" />
+            </figure>
+            <label>
+                manufacturer:
+                <input disabled="true" th:value="${car.manufacturer}"/>
+            </label>
+            <label>
+                make:
+                <input disabled="true" th:value="${car.make}"/>
+            </label>
+            <label>
+                model:
+                <input disabled="true" th:value="${car.model}"/>
+            </label>
+            <label>
+                mileage:
+                <input disabled="true" th:value="${car.mileage}"/>
+            </label>
+            <label>
+                description:
+                <textarea disabled="true" th:text="${car.description}" cols="30" rows="12">
+                </textarea>
+            </label>
+            <label>
+                dateOfPurchase:
+                <input disabled="true" th:value="${car.dateOfPurchase}"/>
+            </label>
+            <label>
+                price:
+                <input disabled="true" th:value='${"$" + car.price}'/>
+            </label>
+            <label>
+                condition:
+                <input disabled="true" th:if="${car.used}" th:value="USED" />
+                <input disabled="true" th:unless="${car.used}" th:value="NEW" />
+            </label>
+        </form>
+
+    </section>
+
+    <div th:unless="${foundCar}">
+        <p>Car for that ID cannot be found!</p>
+    </div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/globalHeadInsert.html">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<main>
+    <div th:include="fragments/navbar.html">
+        <div th:if="${validCarId == false}">
+            Transaction could not be processed, please try again.
+        </div>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>manufacturer</th>
+            <th>make</th>
+            <th>model</th>
+            <th>mileage</th>
+            <th>description</th>
+            <th>dateOfPurchase</th>
+            <th>price</th>
+            <th>show details</th>
+            <th>Buy this car</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="car: ${unsoldCars}">
+            <td th:text="${car.manufacturer}"></td>
+            <td th:text="${car.make}"></td>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.mileage}"></td>
+            <td th:text="${car.description}"></td>
+            <td th:text="${car.dateOfPurchase}"></td>
+            <td th:text="${car.price}"></td>
+            <td><a th:href="@{/cars/{id}(id=${car.id})}">Show details</a></td>
+            <td>
+                <a th:href="@{/transactions/new/{id}(id=${car.id})}">
+                    Buy this car
+                </a>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</main>
+</body>
+</html>

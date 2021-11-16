@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/globalHeadInsert.html">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main> <div th:include="fragments/navbar.html"></div>
+<div th:if="${foundCar}">
+    <form
+        th:object="${newTransaction}"
+        th:action="@{/transactions/new/{carId}(carId=${newTransaction.car.id})}"
+        method="POST"
+    >
+        <label for="fullName">
+            full name:
+        </label>
+        <input id="fullName" th:field="${newTransaction.buyer.fullName}" />
+
+        <label for="email">
+            email:
+        </label>
+        <input id="email" th:field="${newTransaction.buyer.email}" />
+
+        <label for="fullAddress">
+            full address:
+        </label>
+        <textarea id="fullAddress" th:field="${newTransaction.buyer.fullAddress}" cols="30" rows="12"></textarea>
+
+
+        <label for="paymentInformation">
+            payment information:
+        </label>
+        <textarea id="paymentInformation" th:field="${newTransaction.paymentInformation}" cols="30" rows="12"></textarea>
+
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div th:unless="${foundCar}">
+    <p>Car for that ID cannot be found!</p>
+</div>
+
+</main></body>
+</html>

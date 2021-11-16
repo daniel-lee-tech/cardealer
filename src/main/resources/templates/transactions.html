@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/globalHeadInsert.html">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <div th:include="fragments/navbar.html"></div>
+    <div th:if="${validTransactionId != null}">
+        Transaction id is not valid, please try again.
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>transactionDate</th>
+            <th>buyer fullname</th>
+            <th>paymentInformation</th>
+            <th>price</th>
+            <th>car details</th>
+            <th>buyer details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="transaction: ${allTransactions}">
+            <td th:text="${transaction.transactionDate}"></td>
+            <td th:text="${transaction.buyer.fullName}"></td>
+
+            <td th:text="${transaction.paymentInformation}"></td>
+            <td th:text="${transaction.car.price}"></td>
+            <td><a th:href="@{/cars/{id}(id=${transaction.car.id})}">Show Car details</a>
+            </td>
+            <td><a th:href="@{/buyers/{id}(id=${transaction.buyer.id})}">Show Buyer details</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

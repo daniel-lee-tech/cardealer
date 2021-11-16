@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/globalHeadInsert.html">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main> <div th:include="fragments/navbar.html"></div>
+<div th:if="${foundTransaction}">
+    <p th:text="${transaction.transactionDate}"></p>
+    <p th:text="${transaction.buyer.fullName}"></p>
+    <p th:text="${transaction.buyer.email}"></p>
+    <p th:text="${transaction.buyer.fullAddress}"></p>
+    <p th:text="${transaction.car.make}"></p>
+    <p th:text="${transaction.car.model}"></p>
+</div>
+
+<div th:unless="${foundTransaction}">
+    <p>Transaction for that ID cannot be found!</p>
+</div>
+
+</main></body>
+</html>

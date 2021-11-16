@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/globalHeadInsert.html">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<main>
+    <div th:include="fragments/navbar.html"></div>
+    <table>
+        <thead>
+        <tr>
+            <th>manufacturer</th>
+            <th>make</th>
+            <th>model</th>
+            <th>mileage</th>
+            <th>description</th>
+            <th>dateOfPurchase</th>
+            <th>price</th>
+            <th>show details</th>
+            <th>Buy this car</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="info: ${allCars}">
+            <td th:text="${info.car.manufacturer}"></td>
+            <td th:text="${info.car.make}"></td>
+            <td th:text="${info.car.model}"></td>
+            <td th:text="${info.car.mileage}"></td>
+            <td th:text="${info.car.description}"></td>
+            <td th:text="${info.car.dateOfPurchase}"></td>
+            <td th:text="${info.car.price}"></td>
+            <td><a th:href="@{/cars/{id}(id=${info.car.id})}">Show details</a></td>
+            <td th:if="${info.transaction == null}"><a th:href="@{/transactions/new/{id}(id=${info.car.id})}">Buy this
+                car</a></td>
+            <td th:unless="${info.transaction == null}">SOLD!</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
