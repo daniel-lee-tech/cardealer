@@ -25,7 +25,7 @@ public class InventoryController {
         return "index.html";
     }
 
-    @GetMapping("/inventory")
+    @GetMapping({"/inventory", "/unsoldcars"})
     public String getUnsoldCars(Model model) {
         model.addAttribute("unsoldCars", inventoryService.findUnsoldCars());
 
@@ -39,7 +39,7 @@ public class InventoryController {
         return "inventory.html";
     }
 
-    @GetMapping("/inventory/search")
+    @GetMapping({"/inventory/search", "/inventory/bymodel"})
     public String searchPage(Model model) {
         model.addAttribute("models", inventoryService.getUnsoldModels());
         return "search.html";
