@@ -31,7 +31,7 @@ public class UsersOnlyAspect {
 
     @Before("@annotation(org.danlee.cardealer.annotations.BuyersOnly)")
     public void filterBuyers(JoinPoint joinPoint) throws Exception {
-
+        filter(UserRoles.Buyer, joinPoint);
     }
 
     private void filter(UserRoles role, JoinPoint joinPoint) {
@@ -55,7 +55,7 @@ public class UsersOnlyAspect {
                     throw new AccessDeniedException("Only Buyers can access this page");
                 }
 
-                if (!possibleUser.getRole().equals(UserRoles.Buyer)) {
+                if (!possibleUser.getRoles().contains(UserRoles.Buyer)) {
                     throw new AccessDeniedException("Only Buyers can access this page");
                 }
 

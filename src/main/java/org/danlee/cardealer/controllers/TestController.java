@@ -18,6 +18,8 @@ public class TestController {
     @GetMapping("/test")
     @BuyersOnly
     public String test() {
+        System.out.println(userRepository.findAll().size());
+
         return "home.html";
     }
 

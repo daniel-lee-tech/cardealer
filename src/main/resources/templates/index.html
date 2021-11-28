@@ -34,7 +34,7 @@
             <a
                     class="btn btn-outline-success"
                     th:if="${info.transaction == null && info.car.isBiddable()}"
-                    th:href="@{/transactions/new/{id}(id=${info.car.id})}"
+                    th:href="@{/transactions/bid/{id}(id=${info.car.id})}"
             >
                 Place bid
             </a>

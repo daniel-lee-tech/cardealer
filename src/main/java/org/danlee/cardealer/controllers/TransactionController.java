@@ -61,8 +61,9 @@ public class TransactionController {
         return "buyerDetails.html";
     }
 
-    @GetMapping("/transactions/new/{carId}")
-    public String buyCarForm(@PathVariable UUID carId, Model model) {
+    @GetMapping("/transactions/bid/{carId}")
+    @BuyersOnly
+    public String buyCarForm(@PathVariable UUID carId, Model model, HttpSession session) {
         Car possibleCar = carRepository.findById(carId);
         if (possibleCar == null) {
             model.addAttribute("foundCar", false);
@@ -76,9 +77,9 @@ public class TransactionController {
         return "buyCarForm.html";
     }
 
-    @PostMapping("/transactions/new/{carId}")
+    @PostMapping("/transactions/bid/{carId}")
     @BuyersOnly
-    public String buyCarTransaction(@PathVariable UUID carId, @ModelAttribute Transaction transaction, Model model) {
+    public String buyCarTransaction(@PathVariable UUID carId, @ModelAttribute Transaction transaction, Model model, HttpSession session) {
         Car possibleCar = carRepository.findById(carId);
         if (possibleCar == null) {
             model.addAttribute("validCarId", false);

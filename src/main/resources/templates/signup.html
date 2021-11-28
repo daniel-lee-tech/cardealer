@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/globalTopInsert.html">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <div th:include="fragments/navbar.html"></div>
+
+    <!--/*@thymesVar id="newUser" type="org.danlee.cardealer.dto.SignupDTO" */-->
+    <form action="/signup" method="POST" class="m-5" th:object="${newUser}">
+        <h1>Signup</h1>
+
+        <!--/*@thymesVar id="errorMessage" type="String"*/-->
+        <!--/*@thymesVar id="errorPresent" type="boolean"*/-->
+        <div th:if="${errorPresent}" class="alert alert-danger" role="alert" th:text="${errorMessage}">
+            A simple danger alert—check it out!
+        </div>
+
+        <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input required th:field="*{user.fullName}" type="text" class="form-control" id="fullName">
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input required th:field="*{user.email}" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Full address</label>
+            <input required th:field="*{user.fullAddress}" type="text" class="form-control" id="address" aria-describedby="emailHelp">
+        </div>
+
+        <div class="mb-3">
+            <label for="plainTextPassword" class="form-label">Password</label>
+            <input required th:field="*{plainTextPassword}" type="password" class="form-control" id="plainTextPassword">
+        </div>
+
+        <div class="mb-3">
+            <label for="passwordConfirmation" class="form-label">Password Confirmation</label>
+            <input required th:field="*{passwordConfirmation}" type="password" class="form-control" id="passwordConfirmation">
+        </div>
+
+        <div class="mb-3 form-check">
+            <input th:field="*{rolesDTO.buyerRole}" type="checkbox" class="form-check-input" id="buyerRole">
+            <label class="form-check-label" for="buyerRole">Buyer</label>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input th:field="*{rolesDTO.sellerRole}" type="checkbox" class="form-check-input" id="SellerRole">
+            <label class="form-check-label" for="SellerRole">Seller</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+</main></body>
+</html>
