@@ -1,7 +1,7 @@
 package org.danlee.cardealer.repositories;
 
 import org.danlee.cardealer.db.MockDatabase;
-import org.danlee.cardealer.entities.Buyer;
+import org.danlee.cardealer.entities.User;
 import org.danlee.cardealer.entities.Car;
 import org.danlee.cardealer.entities.Transaction;
 import org.springframework.stereotype.Repository;
@@ -38,7 +38,7 @@ public class TransactionRepository {
     }
 
 
-    public Buyer findBuyerById(UUID id) {
+    public User findBuyerById(UUID id) {
         ArrayList<Transaction> allTransactions = mockDatabase.getAllTransactions();
 
         for (Transaction loopedTransaction: allTransactions) {

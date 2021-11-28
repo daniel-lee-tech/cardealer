@@ -1,43 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/globalHeadInsert.html">
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:include="fragments/globalTopInsert.html">
 </head>
 <body>
 
-<main>
-    <div th:include="fragments/navbar.html"></div>
-    <table>
-        <thead>
-        <tr>
-            <th>manufacturer</th>
-            <th>make</th>
-            <th>model</th>
-            <th>mileage</th>
-            <th>description</th>
-            <th>dateOfPurchase</th>
-            <th>price</th>
-            <th>show details</th>
-            <th>Buy this car</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="info: ${allCars}">
-            <td th:text="${info.car.manufacturer}"></td>
-            <td th:text="${info.car.make}"></td>
-            <td th:text="${info.car.model}"></td>
-            <td th:text="${info.car.mileage}"></td>
-            <td th:text="${info.car.description}"></td>
-            <td th:text="${info.car.dateOfPurchase}"></td>
-            <td th:text="${info.car.price}"></td>
-            <td><a th:href="@{/cars/{id}(id=${info.car.id})}">Show details</a></td>
-            <td th:if="${info.transaction == null}"><a th:href="@{/transactions/new/{id}(id=${info.car.id})}">Buy this
-                car</a></td>
-            <td th:unless="${info.transaction == null}">SOLD!</td>
-        </tr>
-        </tbody>
-    </table>
+<div th:include="fragments/navbar.html"></div>
+
+<main class="container-fluid">
+    <section>
+
+        <aside th:each="info: ${allCars}">
+            <label>
+                manufacturer:
+                <input type="text" disabled th:value="${info.car.manufacturer}">
+            </label>
+            <label>
+                make:
+                <input type="text" disabled th:value="${info.car.make}">
+            </label>
+                <input type="text" disabled th:value="${info.car.model}">
+                <input type="text" disabled th:value="${info.car.mileage}">
+                <input type="text" disabled th:value="${info.car.price}">
+                <a th:href="@{/cars/{id}(id=${info.car.id})}">
+                    Show details
+                </a>
+                <a
+                    th:if="${info.transaction == null && info.car.isBiddable()}"
+                    th:href="@{/transactions/new/{id}(id=${info.car.id})}"
+                >
+                    Place bid
+                </a>
+                <sup type="text" disabled th:if="${info.transaction == null && !info.car.isBiddable()}">Buy at
+                    dealership</sup>
+                <p type="text" disabled th:unless="${info.transaction == null}">SOLD!</p>
+
+        </aside>
+    </section>
 </main>
 </body>
 </html>

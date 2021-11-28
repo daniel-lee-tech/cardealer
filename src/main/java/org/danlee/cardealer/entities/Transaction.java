@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Transaction {
     private UUID id;
-    private Buyer buyer;
+    private User buyer;
     private Car car;
     private Date transactionDate;
     private String paymentInformation;
@@ -14,7 +14,7 @@ public class Transaction {
         this.id = UUID.randomUUID();
     }
 
-    public Transaction(Buyer buyer, Car car, Date transactionDate, String paymentInformation) {
+    public Transaction(User buyer, Car car, Date transactionDate, String paymentInformation) {
         this.id = UUID.randomUUID();
         this.buyer = buyer;
         this.car = car;
@@ -22,7 +22,7 @@ public class Transaction {
         this.paymentInformation = paymentInformation;
     }
 
-    public Transaction(Car car, Buyer buyer) {
+    public Transaction(Car car, User buyer) {
         this.id = UUID.randomUUID();
         this.car = car;
         this.buyer = buyer;
@@ -37,11 +37,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public Buyer getBuyer() {
+    public User getBuyer() {
         return buyer;
     }
 
-    public void setBuyer(Buyer buyer) {
+    public void setBuyer(User buyer) {
         this.buyer = buyer;
     }
 

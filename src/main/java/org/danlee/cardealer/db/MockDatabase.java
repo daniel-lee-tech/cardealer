@@ -1,8 +1,9 @@
 package org.danlee.cardealer.db;
 
-import org.danlee.cardealer.entities.Buyer;
+import org.danlee.cardealer.entities.User;
 import org.danlee.cardealer.entities.Car;
 import org.danlee.cardealer.entities.Transaction;
+import org.danlee.cardealer.enums.UserRoles;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Date;
 public class MockDatabase {
     private ArrayList<Car> allCars = new ArrayList<Car>();
     private ArrayList<Transaction> allTransactions = new ArrayList<Transaction>();
-    private ArrayList<Buyer> allBuyers = new ArrayList<Buyer>();
+    private ArrayList<User> allUsers = new ArrayList<User>();
 
     public MockDatabase() {
         generateMockCars();
@@ -36,14 +37,6 @@ public class MockDatabase {
         this.allTransactions = allTransactions;
     }
 
-    public ArrayList<Buyer> getAllBuyers() {
-        return allBuyers;
-    }
-
-    public void setAllBuyers(ArrayList<Buyer> allBuyers) {
-        this.allBuyers = allBuyers;
-    }
-
     public void generateMockCars() {
         allCars.add(new Car("toyota", generateDateWithDayOffset(-10), 2340, "Camry", "xlm32", "really nice", 32133, "/images/democar1.jpg", true));
         allCars.add(new Car("honda", generateDateWithDayOffset(-20), 2340, "accord", "dsa23", "really good", 1332, "/images/democar1.jpg", true));
@@ -58,9 +51,14 @@ public class MockDatabase {
     }
 
     public void generateMockTransactions() {
-        Buyer buyer = new Buyer("Daniel Lee", "dan@email.com", "I live somewhere");
+        User buyer = new User("Daniel Lee", "dan@email.com", "I live somewhere", UserRoles.Buyer);
+        addUser(buyer);
         allTransactions.add(new Transaction(buyer, allCars.get(1), generateDateWithDayOffset(-20), "CREDIT CARD: 11111111"));
         allTransactions.add(new Transaction(buyer, allCars.get(0), new Date(), "CREDIT CARD: 3213214213213"));
+    }
+
+    private void addUser(User user) {
+        allUsers.add(user);
     }
 
     private Date generateDateWithDayOffset(int numDays) {
@@ -78,5 +76,9 @@ public class MockDatabase {
 
     public void addCar(Car car) {
         allCars.add(car);
+    }
+
+    public ArrayList<User> getAllUsers() {
+        return this.allUsers;
     }
 }

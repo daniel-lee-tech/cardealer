@@ -1,6 +1,7 @@
 package org.danlee.cardealer.controllers;
 
-import org.danlee.cardealer.entities.Buyer;
+import org.danlee.cardealer.annotations.BuyersOnly;
+import org.danlee.cardealer.entities.User;
 import org.danlee.cardealer.entities.Car;
 import org.danlee.cardealer.entities.Transaction;
 import org.danlee.cardealer.repositories.CarRepository;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.UUID;
 
@@ -47,7 +49,7 @@ public class TransactionController {
 
     @GetMapping("/buyers/{id}")
     public String showBuyer(@PathVariable UUID id, Model model) {
-        Buyer possibleBuyer = transactionRepository.findBuyerById(id);
+        User possibleBuyer = transactionRepository.findBuyerById(id);
 
         if (possibleBuyer == null) {
             model.addAttribute("foundBuyer", false);
@@ -68,13 +70,14 @@ public class TransactionController {
             model.addAttribute("foundCar", true);
         }
 
-        Transaction newTransaction = new Transaction(possibleCar, new Buyer());
+        Transaction newTransaction = new Transaction(possibleCar, new User());
         model.addAttribute("newTransaction", newTransaction);
 
         return "buyCarForm.html";
     }
 
     @PostMapping("/transactions/new/{carId}")
+    @BuyersOnly
     public String buyCarTransaction(@PathVariable UUID carId, @ModelAttribute Transaction transaction, Model model) {
         Car possibleCar = carRepository.findById(carId);
         if (possibleCar == null) {

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:include="fragments/globalHeadInsert.html">
+<head th:include="fragments/globalTopInsert.html">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<main> <div th:include="fragments/navbar.html"></div>
+<main>
+    <div th:include="fragments/navbar.html"></div>
 <div th:if="${foundCar}">
     <form
         th:object="${newTransaction}"

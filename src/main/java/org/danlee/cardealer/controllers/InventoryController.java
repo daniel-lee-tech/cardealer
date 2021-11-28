@@ -17,7 +17,7 @@ public class InventoryController {
         this.inventoryService = inventoryService;
     }
 
-    @GetMapping({"/cars", "/"})
+    @GetMapping({"/cars"})
     public String getCarsIndex(Model model) {
         ArrayList<CarWithTransaction> allCarsWithTransactions = inventoryService.combineCarsWithTransactions();
         model.addAttribute("allCars", allCarsWithTransactions);

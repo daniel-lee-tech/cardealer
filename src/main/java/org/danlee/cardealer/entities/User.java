@@ -1,22 +1,26 @@
 package org.danlee.cardealer.entities;
 
+import org.danlee.cardealer.enums.UserRoles;
+
 import java.util.UUID;
 
-public class Buyer {
+public class User {
     private UUID id;
     private String fullName;
     private String email;
     private String fullAddress;
+    private UserRoles role;
 
-    public Buyer() {
+    public User() {
         this.id = UUID.randomUUID();
     }
 
-    public Buyer(String fullName, String email, String fullAddress) {
+    public User(String fullName, String email, String fullAddress, UserRoles role) {
         this.fullName = fullName;
         this.email = email;
         this.fullAddress = fullAddress;
         this.id = UUID.randomUUID();
+        this.role = role;
     }
 
     public UUID getId() {
@@ -49,5 +53,13 @@ public class Buyer {
 
     public void setFullAddress(String fullAddress) {
         this.fullAddress = fullAddress;
+    }
+
+    public UserRoles getRole() {
+        return role;
+    }
+
+    public void setRole(UserRoles role) {
+        this.role = role;
     }
 }

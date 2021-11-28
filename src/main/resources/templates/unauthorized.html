@@ -6,9 +6,9 @@
 </head>
 <body>
 <main> <div th:include="fragments/navbar.html"></div>
-<div th:each="model: ${models}">
-    <a th:href="@{/inventory/model/{model}(model=${model})}">Show cars with model <span th:text="${model}"></span></a>
-    <hr />
-</div>
+
+    You are not authorized for this page, please log in with the proper credentials
+
+
 </main></body>
 </html>

@@ -94,14 +94,6 @@ public class Car {
     }
 
     public double getPrice() {
-        if (getDateOfPurchase() == null) return 0;
-        Date dateOfListing = getDateOfPurchase();
-        Date currentDate = new Date();
-        long millisecondsInADay = 86_400_000L;
-        long millisecondsIn120Days = millisecondsInADay * 120;
-        if (currentDate.getTime() - dateOfListing.getTime() >= millisecondsIn120Days) {
-            return price * .9;
-        }
         return price;
     }
 
@@ -123,5 +115,22 @@ public class Car {
 
     public void setUsed(boolean used) {
         this.used = used;
+    }
+
+    public boolean isBiddable() {
+        if (getDateOfPurchase() == null) return false;
+        Date dateOfListing = getDateOfPurchase();
+        Date currentDate = new Date();
+        long millisecondsInADay = 86_400_000L;
+        long millisecondsIn120Days = millisecondsInADay * 120;
+        return currentDate.getTime() - dateOfListing.getTime() >= millisecondsIn120Days;
+    }
+
+    public double biddableMinimum() {
+        if (isBiddable()) {
+            return price * .9;
+        } else {
+            return getPrice();
+        }
     }
 }
