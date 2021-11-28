@@ -6,36 +6,43 @@
 
 <div th:include="fragments/navbar.html"></div>
 
-<main class="container-fluid">
-    <section>
-
-        <aside th:each="info: ${allCars}">
-            <label>
+<main class="d-flex container-fluid flex-wrap justify-content-center">
+    <!--/*@thymesVar id="allCars" type="java.util.ArrayList<org.danlee.cardealer.viewmodels.CarWithTransaction"*/-->
+    <div  th:each="info: ${allCars}" class="card m-3" style="width: 18rem">
+        <img class="card-img-top" th:src="${info.car.imageUrl}" alt="Image of car">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${info.car.make}">Car Make</h5>
+            <p class="card-text" th:text="${info.car.description}">Car Description here</p>
+            <strong>
                 manufacturer:
-                <input type="text" disabled th:value="${info.car.manufacturer}">
-            </label>
-            <label>
+            </strong>
+
+            <p type="text" th:text="${info.car.manufacturer}">Car manufacturer</p>
+
+            <strong>
                 make:
-                <input type="text" disabled th:value="${info.car.make}">
-            </label>
-                <input type="text" disabled th:value="${info.car.model}">
-                <input type="text" disabled th:value="${info.car.mileage}">
-                <input type="text" disabled th:value="${info.car.price}">
-                <a th:href="@{/cars/{id}(id=${info.car.id})}">
-                    Show details
-                </a>
-                <a
+            </strong>
+            <p type="text" th:text="${info.car.make}">Car Make</p>
+
+
+            <strong>
+                model:
+            </strong>
+            <p type="text" th:text="${info.car.model}">Car Model</p>
+
+            <a th:href="@{/cars/{id}(id=${info.car.id})}" class="btn btn-primary">Show details</a>
+            <a
+                    class="btn btn-outline-success"
                     th:if="${info.transaction == null && info.car.isBiddable()}"
                     th:href="@{/transactions/new/{id}(id=${info.car.id})}"
-                >
-                    Place bid
-                </a>
-                <sup type="text" disabled th:if="${info.transaction == null && !info.car.isBiddable()}">Buy at
-                    dealership</sup>
-                <p type="text" disabled th:unless="${info.transaction == null}">SOLD!</p>
+            >
+                Place bid
+            </a>
 
-        </aside>
-    </section>
+            <button class="btn btn-outline-danger"  disabled th:unless="${info.transaction == null}">SOLD!</button>
+
+        </div>
+    </div>
 </main>
 </body>
 </html>
