@@ -23,11 +23,11 @@ public class UsersOnlyAspect {
     public UsersOnlyAspect(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-    @Before("@annotation(org.danlee.cardealer.annotations.UsersOnly)")
-    public void filterUsers(JoinPoint joinPoint) throws Exception {
-
-    }
+//
+//    @Before("@annotation(org.danlee.cardealer.annotations.UsersOnly)")
+//    public void filterUsers(JoinPoint joinPoint) throws Exception {
+//
+//    }
 
     @Before("@annotation(org.danlee.cardealer.annotations.BuyersOnly)")
     public void filterBuyers(JoinPoint joinPoint) throws Exception {
