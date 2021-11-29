@@ -100,4 +100,9 @@ public class UserRepository {
         mockDatabase.addUser(newUser);
         return newUser;
     }
+
+    public User findByEmailAndPasswordDigest(String email, String passwordDigest) {
+        var filteredUsers = findAllBuyers().stream().filter(user -> user.getEmail().equals(email) && user.getPasswordDigest().equals(passwordDigest)).toList();
+        return filteredUsers.size() > 0 ? filteredUsers.get(0) : null;
+    }
 }

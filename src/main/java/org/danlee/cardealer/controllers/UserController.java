@@ -4,6 +4,7 @@ import org.danlee.cardealer.dto.LoginDTO;
 import org.danlee.cardealer.dto.SignupDTO;
 import org.danlee.cardealer.entities.User;
 import org.danlee.cardealer.repositories.UserRepository;
+import org.danlee.cardealer.utils.PasswordUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,7 @@ public class UserController {
     @PostMapping({"/signup"})
     public ModelAndView postSignup(@ModelAttribute("newUser") SignupDTO signupDTO, Model model, HttpSession session) {
         User foundUser = userRepository.findByEmail(signupDTO.getUser().getEmail());
-        System.out.println(foundUser);
+
         if (foundUser != null) {
             signupDTO.setErrorPresent(true);
             signupDTO.setErrorMessage("Email is already in use");
@@ -58,5 +59,29 @@ public class UserController {
     @GetMapping({"/login"})
     public ModelAndView login() {
         return new ModelAndView("login.html", "newLogin", new LoginDTO());
+    }
+
+    @PostMapping({"/login"})
+    public ModelAndView postLogin(@ModelAttribute("newLogin") LoginDTO loginDTO, HttpSession httpSession) {
+        String email = loginDTO.getEmail();
+        String passwordDigest = PasswordUtils.createPasswordDigest(loginDTO.getPlainTextPassword());
+
+        User possibleUser = userRepository.findByEmailAndPasswordDigest(email, passwordDigest);
+
+        if (possibleUser == null) {
+
+            loginDTO.setErrorPresent(true);
+            loginDTO.setErrorMessage("Wrong Credentials");
+            return new ModelAndView("login.html", "newLogin", loginDTO);
+        }
+
+        httpSession.setAttribute("userId", possibleUser.getId());
+        return new ModelAndView("redirect:/home");
+    }
+
+    @GetMapping({"/logout"})
+    public ModelAndView logout(HttpSession httpSession) {
+        httpSession.removeAttribute("userId");
+        return new ModelAndView("redirect:/home");
     }
 }

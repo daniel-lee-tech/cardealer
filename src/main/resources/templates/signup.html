@@ -14,7 +14,7 @@
 
         <!--/*@thymesVar id="errorMessage" type="String"*/-->
         <!--/*@thymesVar id="errorPresent" type="boolean"*/-->
-        <div th:if="${errorPresent}" class="alert alert-danger" role="alert" th:text="${errorMessage}">
+        <div th:if="${newUser.errorPresent}" class="alert alert-danger" role="alert" th:text="${newUser.errorMessage}">
             A simple danger alert—check it out!
         </div>
 

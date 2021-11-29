@@ -1,8 +1,8 @@
 package org.danlee.cardealer.dto;
 
-public class LoginDTO {
+public class LoginDTO extends BaseDTO{
     private String email;
-    private String password;
+    private String plainTextPassword;
 
     public String getEmail() {
         return email;
@@ -12,11 +12,11 @@ public class LoginDTO {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPlainTextPassword() {
+        return plainTextPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPlainTextPassword(String plainTextPassword) {
+        this.plainTextPassword = plainTextPassword;
     }
 }

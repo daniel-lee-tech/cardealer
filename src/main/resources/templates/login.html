@@ -5,7 +5,32 @@
     <title>Title</title>
 </head>
 <body>
-<main> <div th:include="fragments/navbar.html"></div>
+<main>
+    <div th:include="fragments/navbar.html"></div>
+
+    <!--/*@thymesVar id="newLogin" type="org.danlee.cardealer.dto.LoginDTO" */-->
+    <form action="/login" method="POST" class="m-5" th:object="${newLogin}">
+        <h1>Login</h1>
+
+        <!--/*@thymesVar id="errorMessage" type="String"*/-->
+        <!--/*@thymesVar id="errorPresent" type="boolean"*/-->
+        <div th:if="${newLogin.errorPresent}" class="alert alert-danger" role="alert" th:text="${newLogin.errorMessage}">
+            A simple danger alert—check it out!
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input required th:field="*{email}" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="plainTextPassword" class="form-label">Password</label>
+            <input required th:field="*{plainTextPassword}" type="password" class="form-control" id="plainTextPassword">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
 
 </main></body>
