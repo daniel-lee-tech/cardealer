@@ -7,53 +7,67 @@
 <body>
 <main>
     <div th:include="fragments/navbar.html"></div>
-    <section th:if="${foundCar}">
-        <form>
-            <figure>
-                <img th:src="${car.imageUrl}" />
-            </figure>
-            <label>
-                manufacturer:
-                <input disabled="true" th:value="${car.manufacturer}"/>
-            </label>
-            <label>
-                make:
-                <input disabled="true" th:value="${car.make}"/>
-            </label>
-            <label>
-                model:
-                <input disabled="true" th:value="${car.model}"/>
-            </label>
-            <label>
-                mileage:
-                <input disabled="true" th:value="${car.mileage}"/>
-            </label>
-            <label>
-                description:
-                <textarea disabled="true" th:text="${car.description}" cols="30" rows="12">
-                </textarea>
-            </label>
-            <label>
-                dateOfPurchase:
-                <input disabled="true" th:value="${car.dateOfPurchase}"/>
-            </label>
-            <label>
-                price:
-                <input disabled="true" th:value='${"$" + car.price}'/>
-            </label>
-            <label>
-                condition:
-                <input disabled="true" th:if="${car.used}" th:value="USED" />
-                <input disabled="true" th:unless="${car.used}" th:value="NEW" />
-            </label>
-        </form>
 
-    </section>
+    <!--/*@thymesVar id="car" type="org.danlee.cardealer.entities.Car"*/-->
+    <!--/*@thymesVar id="foundCar" type="boolean"*/-->
+
+    <div class="container-fluid mx-auto" th:if="${foundCar}">
+
+        <form class="m-5">
+            <fieldset disabled>
+                <div class="mx-auto mb-3">
+                    <img th:src="${car.imageUrl}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="manufacturer" class="form-label">manufacturer</label>
+                    <input type="email" class="form-control" id="manufacturer" th:value="${car.manufacturer}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="make" class="form-label">make</label>
+                    <input type="text" class="form-control" id="make" th:value="${car.make}">
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="model" class="form-label">model</label>
+                    <input type="text" class="form-control" id="model" th:value="${car.model}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="mileage" class="form-label">mileage</label>
+                    <input type="text" class="form-control" id="mileage" th:value="${car.mileage}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">description</label>
+                    <textarea class="form-control" id="description" th:text="${car.description}">
+                    </textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="dateOfPurchase" class="form-label">dateOfPurchase</label>
+                    <input type="text" class="form-control" id="dateOfPurchase" th:value="${car.dateOfPurchase}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="price" class="form-label">price</label>
+                    <input type="text" class="form-control" id="price" th:value="${car.dateOfPurchase}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="condition" class="form-label">condition</label>
+                    <input type="text" class="form-control" id="condition" th:if="${car.used}" th:value="USED"/>
+                    <input type="text" class="form-control" id="condition" th:unless="${car.used}" th:value="NEW"/>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 
     <div th:unless="${foundCar}">
         <p>Car for that ID cannot be found!</p>
     </div>
-
 </main>
 </body>
 </html>

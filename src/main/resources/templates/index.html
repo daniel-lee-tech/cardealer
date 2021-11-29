@@ -7,7 +7,7 @@
 <div th:include="fragments/navbar.html"></div>
 
 <main class="d-flex container-fluid flex-wrap justify-content-center">
-    <!--/*@thymesVar id="allCars" type="java.util.ArrayList<org.danlee.cardealer.viewmodels.CarWithTransaction"*/-->
+    <!--/*@thymesVar id="allCars" type="java.util.ArrayList<org.danlee.cardealer.viewmodels.CarWithTransaction>"*/-->
     <div  th:each="info: ${allCars}" class="card m-3" style="width: 18rem">
         <img class="card-img-top" th:src="${info.car.imageUrl}" alt="Image of car">
         <div class="card-body">
