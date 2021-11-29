@@ -1,6 +1,7 @@
 package org.danlee.cardealer.controllers;
 
 import org.danlee.cardealer.annotations.BuyersOnly;
+import org.danlee.cardealer.annotations.SellersOnly;
 import org.danlee.cardealer.entities.User;
 import org.danlee.cardealer.entities.Car;
 import org.danlee.cardealer.entities.Transaction;
@@ -27,14 +28,16 @@ public class TransactionController {
         this.carRepository = carRepository;
     }
 
+    @SellersOnly
     @GetMapping("/transactions")
-    public String getTransactions(Model model) {
+    public String getTransactions(Model model, HttpSession httpSession) {
         model.addAttribute("allTransactions",transactionRepository.getAllTransaction());
         return "transactions.html";
     }
 
+    @SellersOnly
     @GetMapping("/transactions/{id}")
-    public String getTransactions(@PathVariable UUID id,  Model model) {
+    public String getTransactions(@PathVariable UUID id,  Model model, HttpSession httpSession) {
         Transaction possibleTransaction = transactionRepository.findById(id);
 
         if (possibleTransaction == null) {
@@ -47,8 +50,9 @@ public class TransactionController {
         return "transactionDetails.html";
     }
 
+    @SellersOnly
     @GetMapping("/buyers/{id}")
-    public String showBuyer(@PathVariable UUID id, Model model) {
+    public String showBuyer(@PathVariable UUID id, Model model, HttpSession httpSession) {
         User possibleBuyer = transactionRepository.findBuyerById(id);
 
         if (possibleBuyer == null) {

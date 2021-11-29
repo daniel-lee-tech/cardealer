@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,9 +49,9 @@ public class UserRepository {
     }
 
     public User findSellerById(UUID id) {
-        ArrayList<User> allBuyers = findAllBuyers();
+        ArrayList<User> allSellers = findAllSellers();
 
-        List<User> filteredUsers = allBuyers.stream().filter(user -> user.getId().equals(id)).toList();
+        List<User> filteredUsers = allSellers.stream().filter(user -> user.getId().equals(id)).toList();
 
         if (filteredUsers.size() == 0) {
             return null;
@@ -102,7 +103,7 @@ public class UserRepository {
     }
 
     public User findByEmailAndPasswordDigest(String email, String passwordDigest) {
-        var filteredUsers = findAllBuyers().stream().filter(user -> user.getEmail().equals(email) && user.getPasswordDigest().equals(passwordDigest)).toList();
+        var filteredUsers = findAll().stream().filter(user -> user.getEmail().equals(email) && user.getPasswordDigest().equals(passwordDigest)).toList();
         return filteredUsers.size() > 0 ? filteredUsers.get(0) : null;
     }
 }
