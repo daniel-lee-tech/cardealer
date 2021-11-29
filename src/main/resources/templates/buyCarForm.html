@@ -10,7 +10,7 @@
 <div th:if="${foundCar}">
     <form
         th:object="${newTransaction}"
-        th:action="@{/transactions/new/{carId}(carId=${newTransaction.car.id})}"
+        th:action="@{/transactions/bid/{carId}(carId=${newTransaction.car.id})}"
         method="POST"
     >
         <label for="fullName">

@@ -51,13 +51,15 @@ public class MockDatabase {
     }
 
     public void generateMockTransactions() {
-        User buyer = new User("Daniel Lee", "dan@email.com", "I live somewhere", UserRoles.Buyer);
+        var roles =  new ArrayList<UserRoles>();
+        roles.add(UserRoles.Buyer);
+        User buyer = new User("Daniel Lee", "dan@email.com", "I live somewhere", roles, "password");
         addUser(buyer);
         allTransactions.add(new Transaction(buyer, allCars.get(1), generateDateWithDayOffset(-20), "CREDIT CARD: 11111111"));
         allTransactions.add(new Transaction(buyer, allCars.get(0), new Date(), "CREDIT CARD: 3213214213213"));
     }
 
-    private void addUser(User user) {
+    public void addUser(User user) {
         allUsers.add(user);
     }
 

@@ -1,7 +1,10 @@
 package org.danlee.cardealer.entities;
 
 import org.danlee.cardealer.enums.UserRoles;
+import org.danlee.cardealer.utils.PasswordUtils;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class User {
@@ -9,18 +12,20 @@ public class User {
     private String fullName;
     private String email;
     private String fullAddress;
-    private UserRoles role;
+    private ArrayList<UserRoles> roles;
+    private String passwordDigest;
 
     public User() {
         this.id = UUID.randomUUID();
     }
 
-    public User(String fullName, String email, String fullAddress, UserRoles role) {
+    public User(String fullName, String email, String fullAddress, ArrayList<UserRoles> roles, String plainTextPassword) {
         this.fullName = fullName;
         this.email = email;
         this.fullAddress = fullAddress;
         this.id = UUID.randomUUID();
-        this.role = role;
+        this.roles = roles;
+        this.passwordDigest = PasswordUtils.createPasswordDigest(plainTextPassword);
     }
 
     public UUID getId() {
@@ -55,11 +60,20 @@ public class User {
         this.fullAddress = fullAddress;
     }
 
-    public UserRoles getRole() {
-        return role;
+    public ArrayList<UserRoles> getRoles() {
+        return roles;
     }
 
-    public void setRole(UserRoles role) {
-        this.role = role;
+    public void setRoles(ArrayList<UserRoles> roles) {
+        this.roles = roles;
+    }
+
+    public String getPasswordDigest() {
+        return passwordDigest;
+    }
+
+    public void setPasswordDigest(String plainTextPassword) {
+
+        this.passwordDigest = PasswordUtils.createPasswordDigest(plainTextPassword);
     }
 }

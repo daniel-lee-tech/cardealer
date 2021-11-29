@@ -37,7 +37,7 @@
             <td th:text="${car.price}"></td>
             <td><a th:href="@{/cars/{id}(id=${car.id})}">Show details</a></td>
             <td>
-                <a th:href="@{/transactions/new/{id}(id=${car.id})}">
+                <a th:href="@{/transactions/bid/{id}(id=${car.id})}">
                     Buy this car
                 </a>
             </td>
