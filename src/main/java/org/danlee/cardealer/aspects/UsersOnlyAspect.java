@@ -34,7 +34,12 @@ public class UsersOnlyAspect {
         filter(UserRoles.Buyer, joinPoint);
     }
 
-    private void filter(UserRoles role, JoinPoint joinPoint) {
+    @Before("@annotation(org.danlee.cardealer.annotations.SellersOnly)")
+    public void filterSellers(JoinPoint joinPoint) throws Exception {
+        filter(UserRoles.Seller, joinPoint);
+    }
+
+    private void filter(UserRoles role, JoinPoint joinPoint) throws Exception {
         boolean hasHttpSessionArgument = false;
 
         Object[] arguments = joinPoint.getArgs();
@@ -43,20 +48,21 @@ public class UsersOnlyAspect {
             if (loopedArgument.getClass() == StandardSessionFacade.class) {
                 hasHttpSessionArgument = true;
                 HttpSession session = (HttpSession) loopedArgument;
-                System.out.println(session.getAttribute("test"));
+
                 UUID userId = (UUID) session.getAttribute("userId");
                 if (userId == null) {
-                    throw new AccessDeniedException("Only Buyers can access this page");
+                    throw new AccessDeniedException("Only " + role.toString() + "s can access this page");
                 }
 
-                User possibleUser = userRepository.findBuyerById(userId);
+                User possibleUser = userRepository.findByRoleAndId(role, userId);
+                System.out.println(possibleUser);
 
                 if (possibleUser == null) {
-                    throw new AccessDeniedException("Only Buyers can access this page");
+                    throw new AccessDeniedException("Only " + role.toString() + "s can access this page");
                 }
 
-                if (!possibleUser.getRoles().contains(UserRoles.Buyer)) {
-                    throw new AccessDeniedException("Only Buyers can access this page");
+                if (!possibleUser.getRoles().contains(role)) {
+                    throw new AccessDeniedException("Only " + role.toString() + "s can access this page");
                 }
 
                 break;
